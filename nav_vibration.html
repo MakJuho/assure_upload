@@ -1,0 +1,381 @@
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+  <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+
+  <link rel="stylesheet" href="font.css">
+  <script src="jquery-2.1.4.js"></script>
+  <!-- <script src="plotly.min.js"></script> -->
+  <!-- <link rel='stylesheet' type='text/css' href="rotate.css"> -->
+
+  <script type="text/javascript" src="plotly.min.js"></script>
+  <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+
+  <style>
+    /* 슬라이드 컨테이너 */
+    .panel{  
+      background-color :#d9edf7;
+    }
+    .slidecontainer {
+      width: 100%;
+      display : inline;
+      padding : 0px 0px 0px 37%;
+      /* padding : 0px 0px 30px 37%; */
+      /* display : inline-block; */
+      /* background-color: white; */
+    }
+
+    .slider {
+      -webkit-appearance: none;
+      width: 25%;
+      height: 30px;
+      border-radius: 5px;
+      background: #31708f;
+      outline: none;
+      opacity: 0.5;
+      -webkit-transition: .2s;
+      transition: opacity .2s;
+    }
+
+    .slider:hover{
+      opacity: 1;
+    }
+
+    .slider::-webkit-slider-thumb {
+
+      -webkit-appearance: none;
+      appearance: none;
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+      background: white;
+      cursor: pointer;
+
+    }
+
+    .slider::-moz-range-thumb {
+
+      width: 25px;
+      height: 25px;
+      border-radius: 25%;
+      background: #31708f;
+      cursor: pointer;
+
+    }
+
+    body {
+      /* background:url('http://superkts.cdn1.cafe24.com/test1.jpg') no-repeat center center fixed; */
+      /* background: #bce8f1; */
+      background: white;
+      /* background-op: 50%; */
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover;
+      margin:0;
+    }
+    ul>li {
+      display: none;
+    }
+
+    #reset {
+      display: none;
+    }
+
+    #counter {
+      display: none;
+    }
+
+    #xyview {
+      display: none;
+    }
+
+    #zview {
+      display: none;
+    }
+
+    #chartContainer {
+      display: none;
+    }
+    
+    /* body {
+      margin: 0; */
+    /* } */
+    /* p {
+      text-align: center;
+      font-size: 40px;
+      padding: 0;
+      margin: 0;
+      /* background-color: rgb(0, 0, 0); */
+    /* } */
+
+    #chart {
+      margin: 40px 0px 0px 0px;
+      padding: 0;
+      height: 40%;
+      /* background-color: rgb(0, 255, 0); */
+    }
+
+    #chart2 {
+      margin: 0;
+      padding: 0;
+      height: 40%;
+      /* background-color: rgb(0, 0, 0); */
+    }
+
+    /* #container{width:100%; color:#31708f;} */
+
+    /* #val{
+      float:left;
+    }
+    #right{
+      float:right;
+    }
+    #center{
+      margin:0 auto;
+    } 
+
+
+    /* side_BAR 스타일 꾸미기 */
+    .menu a {
+      cursor: pointer;
+    }
+
+    .menu .hide {
+      display: none;
+    }
+
+    p{
+      color: #31708f;
+      text-align:left;
+      font-size : 30px;
+      margin : 0px 0px 0px 150px;
+    }
+    
+    h1{
+      color: #31708f;
+      text-align:left;
+      font-size : 40px;
+      margin : 0px 0px 0px 10px;
+      display : inline-block;
+      padding : 20px 0px 0px 0px;
+      font-family:"Daum";
+    }
+    /* .main{
+      background-color: yellow;
+      border: 1px solid red;
+      width: 800px;
+      height: 120px;
+    }  */
+
+    .main_common{ 
+      display: inline-block;
+      /* margin : 0px 0px 0px 300px ; */
+
+    }
+
+    .content {
+      /* display: table-cell; */
+      display: inline-block;
+      vertical-align: middle;
+      text-align: center;
+    }
+    .main_1{
+      margin : 30px 0px 0px 200px;
+      /* width: 100px;
+      height: 50px; */
+      font-size : 30px;
+      /* border: 1px solid blue; */
+      float : center;
+      color : #31708f;
+      /* text-align: center; */
+    }
+  
+    .main_3{
+      margin : 0px 10px 0px 0px;
+      /* width: 270px;
+      height: 50px; */
+      font-size : 70px;
+      /* border: none; */
+      float: right;
+      text-align: right;
+      color: #31708f;
+      
+    }
+    /* .main_4{
+      margin : 0px 0px 0px 0px;
+      /* width: 270px;
+      height: 50px; */
+      /* font-size : 25px; */
+      /* border: none; */
+      /* float: right;
+      color: #31708f; */
+/* } */
+    #space{
+      font-size:10;
+    }
+    .portrait_only {
+      display: none;
+    }    
+  </style>
+
+  <!-- /* side_BAR 버튼 클릭시 Event */ -->
+  <script>
+    // html dom 이 다 로딩된 후 실행된다.
+    $(document).ready(function () {
+      // menu 클래스 바로 하위에 있는 a 태그를 클릭했을때
+      $(".menu>a").click(function () {
+        var submenu = $(this).next("ul");
+
+        // submenu 가 화면상에 보일때는 위로 보드랍게 접고 아니면 아래로 보드랍게 펼치기
+        if (submenu.is(":visible")) {
+          submenu.slideUp();
+        } else {
+          submenu.slideDown();
+        }
+      });
+    });
+  </script>
+  
+  <script type="text/javascript" src="script.js"></script>
+
+</head>
+
+<body>
+  <div class="panel">
+    <h1>Vibration Level</h1>
+
+    <div id="chartContainer" style="height: 300px; width: 100%;">
+    </div>
+    <!-- <div><h2>Acceleration (w/o Gravity)</h2> -->
+    <ul>
+      <li>
+        x:
+        <input id="x1" type="range" max="20.0" min="-20.0" readonly="readonly" />
+        <input id="x1n" type="number" max="20.0" min="-20.0" readonly="readonly" />
+      </li>
+      <li>y:
+        <input id="y1" type="range" max="20.0" min="-20.0" readonly="readonly" />
+        <input id="y1n" type="number" max="20.0" min="-20.0" readonly="readonly" />
+      </li>
+      <li>z:
+        <input id="z1" type="range" max="20.0" min="-20.0" readonly="readonly" />
+        <input id="z1n" type="number" max="20.0" min="-20.0" readonly="readonly" />
+      </li>
+      <li>abs:
+        <input id="abs1" type="range" max="20.0" min="-20.0" readonly="readonly" />
+        <input id="abs1n" type="number" max="20.0" min="-20.0" readonly="readonly" />
+      </li>
+    </ul>
+    <!-- </div> -->
+
+    <!-- <div><h2>Acceleration (w/ Gravity)</h2> -->
+    <ul>
+      <li>x:
+        <input id="x2" type="range" max="20.0" min="-20.0" readonly="readonly" />
+        <input id="x2n" type="number" max="20.0" min="-20.0" readonly="readonly" />
+      </li>
+      <li>y:
+        <input id="y2" type="range" max="20.0" min="-20.0" readonly="readonly" />
+        <input id="y2n" type="number" max="20.0" min="-20.0" readonly="readonly" />
+      </li>
+      <li>z:
+        <input id="z2" type="range" max="20.0" min="-20.0" readonly="readonly" />
+        <input id="z2n" type="number" max="20.0" min="-20.0" readonly="readonly" />
+      </li>
+      <li>abs:
+        <input id="abs2" type="range" max="20.0" min="-20.0" readonly="readonly" />
+        <input id="abs2n" type="number" max="20.0" min="-20.0" readonly="readonly" />
+      </li>
+    </ul>
+    <!-- </div> -->
+    <!-- <div><h2>Acceleration (vertical/horizontal)</h2> -->
+    <ul>
+      <li>v:
+        <input id="v" type="range" max="20.0" min="-20.0" readonly="readonly" />
+        <input id="vn" type="number" max="20.0" min="-20.0" readonly="readonly" />
+      </li>
+      <li>h:
+        <input id="h" type="range" max="20.0" min="-20.0" readonly="readonly" />
+        <input id="hn" type="number" max="20.0" min="-20.0" readonly="readonly" />
+      </li>
+    </ul>
+    <!-- </div> -->
+
+    <div>
+      <span id="counter"></span>
+      <button id="reset" style="padding: 5px 30px; border-radius: 10px;">reset</button>
+    </div>
+
+    <div>
+      <canvas id="xyview" style="width: 200px; height: 200px; background-color: lightgray" width="200" height="200"></canvas>
+      <canvas id="zview" style="width: 600px; height: 200px; background-color: lightgray" width="600" height="200"></canvas>
+    </div>
+    
+
+    <!-- <div class="main"> -->
+  <!-- <p>진동값 -->
+    <!-- 공백란 만들기 -->
+  <!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
+    <!-- </p> -->
+    
+    <div class="main_1 main_common" id="right"><p class="content"></p></div>
+    <!-- <div class="main_2 main_common"><p class="content">test2</p></div> -->
+    <div class="main_3 main_common" id="val"></div>
+  </div>
+
+  
+  
+  <div id="chart"></div>
+    <!-- <div id="container"> -->
+    
+    <!-- <div id="val">0</div>
+    
+    
+    <div id="right">HAHAHA</div> -->
+  
+
+  <!-- <ul>
+    <li>
+      <span id="text">진동값:</span>
+
+    </li>
+    <li>
+      <span id="val">0</span>
+
+    </li>
+    <li>
+      <span id="express">자는중</a>
+    </li>
+
+  </ul> -->
+
+  <!-- 진동 값 <span id="val" style="overflow-y:auto;"> -->
+
+  
+  <!-- <div id="vibrate_val" style="background: blue">진동 값 </div>
+  <div id="val" style="background: yellow">0</div> -->
+  <!-- <span id="text" style="background: green">쪼아~</span> -->
+
+<div class="slidecontainer">
+  <input type="range" min="1" max="4000" value="2000" class="slider" id="myRange"> 기준선:
+  <span id="demo"></span>
+</div>
+
+
+<div id="chart2"></div>
+  <!-- <div>
+	<span id="val">0</span> -->
+  <!-- </div> -->
+  <!-- <script type="text/javascript" src="graph.js"></script>	 -->
+<div class="slidecontainer">
+  <input type="range" min="1" max="4000" value="2000" class="slider" id="myRange2"> 기준선:
+  <span id="demo2"></span>
+</div>
+
+ 
+
+</body>
+
+</html>  
