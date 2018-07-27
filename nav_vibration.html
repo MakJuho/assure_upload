@@ -227,24 +227,103 @@
     .portrait_only {
       display: none;
     }    
+
+    .first_ref{
+      display: none;
+    }
+
+    .second_ref{
+      display: none;
+    }
+
+    .third_ref{
+      display: none;
+    }
+
+    .fourth_ref{
+      display: none;
+    }
+
+    .fifth_ref{
+      display: none;
+    }
+
   </style>
 
   <!-- /* side_BAR 버튼 클릭시 Event */ -->
   <script>
-    // html dom 이 다 로딩된 후 실행된다.
-    $(document).ready(function () {
-      // menu 클래스 바로 하위에 있는 a 태그를 클릭했을때
-      $(".menu>a").click(function () {
-        var submenu = $(this).next("ul");
 
-        // submenu 가 화면상에 보일때는 위로 보드랍게 접고 아니면 아래로 보드랍게 펼치기
-        if (submenu.is(":visible")) {
-          submenu.slideUp();
-        } else {
-          submenu.slideDown();
+// [0,0,0,0,0] 으로 배열 초기화
+var int_box= Array.apply(null, new Array(5)).map(Number.prototype.valueOf,0);
+var count=0;
+var check=0;
+// 버튼 클릭 할 때
+  $(document).ready(function(){
+    count=0;
+    // 추가 기준선 5
+    $("#add_btn").click(function () {
+
+      for(var i=0; i<int_box.length;i++){
+        if(int_box[i]==0){
+          check=i+1;
+          break;
         }
+      }
+      if(check==1){
+        int_box[0]=1;
+        $(".first_ref").show();
+      }else if(check==2){
+        int_box[1]=1;
+        $(".second_ref").show();
+      }else if(check==3){
+        int_box[2]=1;
+        $(".third_ref").show();
+      }else if(check==4){
+        int_box[3]=1;
+        $(".fourth_ref").show();
+      }else if(check==5){
+        int_box[4]=1;
+        $(".fifth_ref").show();
+    }
       });
+
+    // 삭제 기준선 5
+    $("#sub_btn_1").click(function () {
+      int_box[0]=0;
+        $(".first_ref").hide();
+        $("#add1_acc").val('NULL');
+        $("#add1_sum_acc").val('NULL');
     });
+
+    $("#sub_btn_2").click(function () {
+      int_box[1]=0;
+      $(".second_ref").hide();
+      $("#add2_acc").val('NULL');
+      $("#add2_sum_acc").val('NULL');
+    });
+
+    $("#sub_btn_3").click(function () {
+      int_box[2]=0;
+      $(".third_ref").hide();
+      $("#add3_acc").val('NULL');
+      $("#add3_sum_acc").val('NULL');
+    });
+
+    $("#sub_btn_4").click(function () {
+      int_box[3]=0;
+      $(".fourth_ref").hide();
+      $("#add4_acc").val('NULL');
+      $("#add4_sum_acc").val('NULL');
+    });
+
+    $("#sub_btn_5").click(function () {
+      int_box[4]=0;
+      $(".fifth_ref").hide();
+      $("#add5_acc").val('NULL');
+      $("#add5_sum_acc").val('NULL');
+    });
+  });
+  
   </script>
   
   <script type="text/javascript" src="script.js"></script>
@@ -345,65 +424,92 @@
 
             <!-- <input type="number" placeholder="값을 입력해주세요" class="colorfont" id="add" style="margin-left:13px"></input> -->
 
-            <button type="button" class="btn btn-info btn-lg" style="position:absolute; right:15%;"onclick="add()">추가</button>
+            <button type="button" class="btn btn-info btn-lg" id="add_btn" style="position:absolute; right:15%;"onclick="add()">추가</button>
             <div class="colorfont_box" id="list">
               <h1>기준선 목록</h1>
             </div>
+            
 
             <!-- 1번 기준선 -->
-            <br>
-            <text style="font-size: 30px">진동값_1 :</text>
-            <input type="number" placeholder="기준선 값" class="colorfont" id="add1_acc" style="margin-left:12px; text-align:center; border:1px solid #ccc;"></input>
-            <div></div>
-            <br>
-            <text style="font-size: 30px">누적 진동값_1 :</text>
-            <input type="number" placeholder="기준선 값" class="colorfont" id="add1_sum_acc" style="margin-left:12px; text-align:center; border:1px solid #ccc;"></input>
-            <br>
-            <br>
-            <br>
+            <div class="first_ref">
+              <br>
+              <text style="font-size: 30px">진동값_1 :</text>
+              <input type="number" placeholder="기준선 값" class="colorfont" id="add1_acc" style="margin-left:12px; text-align:center; border:1px solid #ccc;"></input>
+              <button type="button" class="btn btn-info btn-lg" id="sub_btn_1" style="position:absolute; right:15%; background-color:red; border-color:red;" onclick="sub_first_ref()">삭제</button>
+
+              <div></div>
+              <br>
+              <text style="font-size: 30px">누적 진동값_1 :</text>
+              <input type="number" placeholder="기준선 값" class="colorfont" id="add1_sum_acc" style="margin-left:12px; text-align:center; border:1px solid #ccc;"></input>
+              <br>
+              <br>
+              <br>
+            </div>
+
 
             <!-- 2번 기준선 -->
-            <text style="font-size: 30px">진동값_2 :</text>
-            <input type="number" placeholder="기준선 값" class="colorfont" id="add2_acc" style="margin-left:12px; text-align:center; border:1px solid #ccc;"></input>
-            <div></div>
-            <br>
-            <text style="font-size: 30px">누적 진동값_2 :</text>
-            <input type="number" placeholder="기준선 값" class="colorfont" id="add2_sum_acc" style="margin-left:12px; text-align:center; border:1px solid #ccc;"></input>
-            <br>
-            <br>
-            <br>
+            <div class="second_ref">
+              <text style="font-size: 30px">진동값_2 :</text>
+              <input type="number" placeholder="기준선 값" class="colorfont" id="add2_acc" style="margin-left:12px; text-align:center; border:1px solid #ccc;"></input>
+              <button type="button" class="btn btn-info btn-lg" id="sub_btn_2" style="position:absolute; right:15%; background-color:red; border-color:red;"
+  onclick="sub_second_ref()">삭제</button>
+
+              <div></div>
+              <br>
+              <text style="font-size: 30px">누적 진동값_2 :</text>
+              <input type="number" placeholder="기준선 값" class="colorfont" id="add2_sum_acc" style="margin-left:12px; text-align:center; border:1px solid #ccc;"></input>
+              <br>
+              <br>
+              <br>
+            </div>
 
 
             <!-- 3번 기준선 -->
-            <text style="font-size: 30px">진동값_3 :</text>
-            <input type="number" placeholder="기준선 값" class="colorfont" id="add3_acc" style="margin-left:12px; text-align:center; border:1px solid #ccc;"></input>
-            <div></div>
-            <br>
-            <text style="font-size: 30px">누적 진동값_3 :</text>
-            <input type="number" placeholder="기준선 값" class="colorfont" id="add3_sum_acc" style="margin-left:12px; text-align:center; border:1px solid #ccc;"></input>
-            <br>
-            <br>
-            <br>
+            <div class="third_ref">
+              <text style="font-size: 30px">진동값_3 :</text>
+              <input type="number" placeholder="기준선 값" class="colorfont" id="add3_acc" style="margin-left:12px; text-align:center; border:1px solid #ccc;"></input>
+              <button type="button" class="btn btn-info btn-lg" id="sub_btn_3" style="position:absolute; right:15%; background-color:red; border-color:red;"
+  onclick="sub_third_ref()">삭제</button>
+
+              <div></div>
+              <br>
+              <text style="font-size: 30px">누적 진동값_3 :</text>
+              <input type="number" placeholder="기준선 값" class="colorfont" id="add3_sum_acc" style="margin-left:12px; text-align:center; border:1px solid #ccc;"></input>
+              <br>
+              <br>
+              <br>
+            </div>
+
 
             <!-- 4번 기준선 -->
-            <text style="font-size: 30px">진동값_4 :</text>
-            <input type="number" placeholder="기준선 값" class="colorfont" id="add4_acc" style="margin-left:12px; text-align:center; border:1px solid #ccc;"></input>
-            <div></div>
-            <br>
-            <text style="font-size: 30px">누적 진동값_4 :</text>
-            <input type="number" placeholder="기준선 값" class="colorfont" id="add4_sum_acc" style="margin-left:12px; text-align:center; border:1px solid #ccc;"></input>
-            <br>
-            <br>
-            <br>
+            <div class="fourth_ref">
+              <text style="font-size: 30px">진동값_4 :</text>
+              <input type="number" placeholder="기준선 값" class="colorfont" id="add4_acc" style="margin-left:12px; text-align:center; border:1px solid #ccc;"></input>
+              <button type="button" class="btn btn-info btn-lg" id="sub_btn_4" style="position:absolute; right:15%; background-color:red; border-color:red;"
+  onclick="sub_fourth_ref()">삭제</button>
+
+              <div></div>
+              <br>
+              <text style="font-size: 30px">누적 진동값_4 :</text>
+              <input type="number" placeholder="기준선 값" class="colorfont" id="add4_sum_acc" style="margin-left:12px; text-align:center; border:1px solid #ccc;"></input>
+              <br>
+              <br>
+              <br>
+            </div>
+
 
             <!-- 5번 기준선 -->
-            <text style="font-size: 30px">진동값_5 :</text>
-            <input type="number" placeholder="기준선 값" class="colorfont" id="add5_acc" style="margin-left:12px; text-align:center; border:1px solid #ccc;"></input>
-            <div></div>
-            <br>
-            <text style="font-size: 30px">누적 진동값_5 :</text>
-            <input type="number" placeholder="기준선 값" class="colorfont" id="add5_sum_acc" style="margin-left:12px; text-align:center; border:1px solid #ccc;"></input>
-            
+            <div class="fifth_ref">
+              <text style="font-size: 30px">진동값_5 :</text>
+              <input type="number" placeholder="기준선 값" class="colorfont" id="add5_acc" style="margin-left:12px; text-align:center; border:1px solid #ccc;"></input>
+              <button type="button" class="btn btn-info btn-lg" id="sub_btn_5" style="position:absolute; right:15%; background-color:red; border-color:red;"
+  onclick="sub_fifth_ref()">삭제</button>
+
+              <div></div>
+              <br>
+              <text style="font-size: 30px">누적 진동값_5 :</text>
+              <input type="number" placeholder="기준선 값" class="colorfont" id="add5_sum_acc" style="margin-left:12px; text-align:center; border:1px solid #ccc;"></input>
+            </div>
 
           </div>
 

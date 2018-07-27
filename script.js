@@ -276,9 +276,7 @@
 // 기준선 5 정의
     var ref_9;
     var ref_10;
-
-
-
+    
     // 기준선 정보
     var add_val1_acc = document.getElementById("add1_acc");
     var add_val1_sum_acc = document.getElementById("add1_sum_acc");
@@ -587,5 +585,4 @@
 
 
 }, false);
-
 
