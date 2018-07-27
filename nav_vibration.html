@@ -2,8 +2,9 @@
 
 <head>
   <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-  <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
 
+  <!-- 자판 키보드 활성화시 확대 기능 차단 -->
+  <meta name="viewport" content="user-scalable=no"/>
   <link rel="stylesheet" href="font.css">
   <script src="jquery-2.1.4.js"></script>
   <!-- <script src="plotly.min.js"></script> -->
@@ -12,15 +13,19 @@
   <script type="text/javascript" src="plotly.min.js"></script>
   <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
 
+  <!-- 모달 박스 css -->
+  <link rel="stylesheet" href="bootstrap.css">
+
   <style>
     /* 슬라이드 컨테이너 */
     .panel{  
+      padding : 0px 0px 30px 0px;
       background-color :#d9edf7;
     }
     .slidecontainer {
       width: 100%;
-      display : inline;
-      padding : 0px 0px 0px 37%;
+      display : inline-block;
+      padding : 0px 0px 0px 0px;
       /* padding : 0px 0px 30px 37%; */
       /* display : inline-block; */
       /* background-color: white; */
@@ -28,7 +33,7 @@
 
     .slider {
       -webkit-appearance: none;
-      width: 25%;
+      width: 40%;
       height: 30px;
       border-radius: 5px;
       background: #31708f;
@@ -111,7 +116,7 @@
     /* } */
 
     #chart {
-      margin: 40px 0px 0px 0px;
+      margin: 60px 0px 0px 0px;
       padding: 0;
       height: 40%;
       /* background-color: rgb(0, 255, 0); */
@@ -138,6 +143,9 @@
 
 
     /* side_BAR 스타일 꾸미기 */
+    .slidecontainer{
+      display: none;
+    }
     .menu a {
       cursor: pointer;
     }
@@ -154,7 +162,7 @@
     }
     
     h1{
-      color: #31708f;
+      
       text-align:left;
       font-size : 40px;
       margin : 0px 0px 0px 10px;
@@ -182,7 +190,7 @@
       text-align: center;
     }
     .main_1{
-      margin : 30px 0px 0px 200px;
+      margin : 30px 0px 0px 150px;
       /* width: 100px;
       height: 50px; */
       font-size : 30px;
@@ -203,6 +211,7 @@
       color: #31708f;
       
     }
+    
     /* .main_4{
       margin : 0px 0px 0px 0px;
       /* width: 270px;
@@ -244,7 +253,7 @@
 
 <body>
   <div class="panel">
-    <h1>Vibration Level</h1>
+<h1 style="color: #31708f;">Vibration Level</h1>
 
     <div id="chartContainer" style="height: 300px; width: 100%;">
     </div>
@@ -319,10 +328,100 @@
     <!-- 공백란 만들기 -->
   <!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
     <!-- </p> -->
+
+    <!-- 모달 부분 시작 -->
     
+    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal2" style="font-size: 25px; float:left; margin:40px 0px 0px 30px;">기준선 설정</button>
+    <!-- Modal -->
+    <div id="myModal2" class="modal fade" role="dialog">
+      <div class="modal-dialog modal-lg">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">기준선 변경</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body">
+
+            <!-- <input type="number" placeholder="값을 입력해주세요" class="colorfont" id="add" style="margin-left:13px"></input> -->
+
+            <button type="button" class="btn btn-info btn-lg" style="position:absolute; right:15%;"onclick="add()">추가</button>
+            <div class="colorfont_box" id="list">
+              <h1>기준선 목록</h1>
+            </div>
+
+            <!-- 1번 기준선 -->
+            <br>
+            <text style="font-size: 30px">진동값_1 :</text>
+            <input type="number" placeholder="기준선 값" class="colorfont" id="add1_acc" style="margin-left:12px; text-align:center; border:1px solid #ccc;"></input>
+            <div></div>
+            <br>
+            <text style="font-size: 30px">누적 진동값_1 :</text>
+            <input type="number" placeholder="기준선 값" class="colorfont" id="add1_sum_acc" style="margin-left:12px; text-align:center; border:1px solid #ccc;"></input>
+            <br>
+            <br>
+            <br>
+
+            <!-- 2번 기준선 -->
+            <text style="font-size: 30px">진동값_2 :</text>
+            <input type="number" placeholder="기준선 값" class="colorfont" id="add2_acc" style="margin-left:12px; text-align:center; border:1px solid #ccc;"></input>
+            <div></div>
+            <br>
+            <text style="font-size: 30px">누적 진동값_2 :</text>
+            <input type="number" placeholder="기준선 값" class="colorfont" id="add2_sum_acc" style="margin-left:12px; text-align:center; border:1px solid #ccc;"></input>
+            <br>
+            <br>
+            <br>
+
+
+            <!-- 3번 기준선 -->
+            <text style="font-size: 30px">진동값_3 :</text>
+            <input type="number" placeholder="기준선 값" class="colorfont" id="add3_acc" style="margin-left:12px; text-align:center; border:1px solid #ccc;"></input>
+            <div></div>
+            <br>
+            <text style="font-size: 30px">누적 진동값_3 :</text>
+            <input type="number" placeholder="기준선 값" class="colorfont" id="add3_sum_acc" style="margin-left:12px; text-align:center; border:1px solid #ccc;"></input>
+            <br>
+            <br>
+            <br>
+
+            <!-- 4번 기준선 -->
+            <text style="font-size: 30px">진동값_4 :</text>
+            <input type="number" placeholder="기준선 값" class="colorfont" id="add4_acc" style="margin-left:12px; text-align:center; border:1px solid #ccc;"></input>
+            <div></div>
+            <br>
+            <text style="font-size: 30px">누적 진동값_4 :</text>
+            <input type="number" placeholder="기준선 값" class="colorfont" id="add4_sum_acc" style="margin-left:12px; text-align:center; border:1px solid #ccc;"></input>
+            <br>
+            <br>
+            <br>
+
+            <!-- 5번 기준선 -->
+            <text style="font-size: 30px">진동값_5 :</text>
+            <input type="number" placeholder="기준선 값" class="colorfont" id="add5_acc" style="margin-left:12px; text-align:center; border:1px solid #ccc;"></input>
+            <div></div>
+            <br>
+            <text style="font-size: 30px">누적 진동값_5 :</text>
+            <input type="number" placeholder="기준선 값" class="colorfont" id="add5_sum_acc" style="margin-left:12px; text-align:center; border:1px solid #ccc;"></input>
+            
+
+          </div>
+
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-default" data-dismiss="modal">확인</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <!-- 모달 부분 끝 -->
+
     <div class="main_1 main_common" id="right"><p class="content"></p></div>
     <!-- <div class="main_2 main_common"><p class="content">test2</p></div> -->
     <div class="main_3 main_common" id="val"></div>
+    
+
+
   </div>
 
   
@@ -358,23 +457,28 @@
   <div id="val" style="background: yellow">0</div> -->
   <!-- <span id="text" style="background: green">쪼아~</span> -->
 
-<div class="slidecontainer">
+
+  <!-- 슬라이더 1  -->
+<!-- <div class="slidecontainer">
   <input type="range" min="1" max="4000" value="2000" class="slider" id="myRange"> 기준선:
-  <span id="demo"></span>
-</div>
+  <span id="slide_val1"></span>
+</div> -->
 
 
 <div id="chart2"></div>
-  <!-- <div>
-	<span id="val">0</span> -->
-  <!-- </div> -->
-  <!-- <script type="text/javascript" src="graph.js"></script>	 -->
+
+<!-- 슬라이더 2 
 <div class="slidecontainer">
   <input type="range" min="1" max="4000" value="2000" class="slider" id="myRange2"> 기준선:
-  <span id="demo2"></span>
-</div>
+  <span id="slide_val2"></span>
+</div> -->
 
- 
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+  crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+  crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+  crossorigin="anonymous"></script>
 
 </body>
 

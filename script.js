@@ -261,12 +261,40 @@
     var value = document.getElementById("val");
     var text = document.getElementById("right");
 
-    var slider = document.getElementById("myRange");
-    var output = document.getElementById("demo");
-    var slider2 = document.getElementById("myRange2");
-    var output2 = document.getElementById("demo2");
+// 기준선 1 정의 
     var ref_1;
     var ref_2;
+// 기준선 2 정의
+    var ref_3;
+    var ref_4;
+// 기준선 3 정의
+    var ref_5;
+    var ref_6;
+// 기준선 4 정의
+    var ref_7;
+    var ref_8;
+// 기준선 5 정의
+    var ref_9;
+    var ref_10;
+
+
+
+    // 기준선 정보
+    var add_val1_acc = document.getElementById("add1_acc");
+    var add_val1_sum_acc = document.getElementById("add1_sum_acc");
+
+    var add_val2_acc = document.getElementById("add2_acc");
+    var add_val2_sum_acc = document.getElementById("add2_sum_acc");
+
+    var add_val3_acc = document.getElementById("add3_acc");
+    var add_val3_sum_acc = document.getElementById("add3_sum_acc");
+
+    var add_val4_acc = document.getElementById("add4_acc");
+    var add_val4_sum_acc = document.getElementById("add4_sum_acc");
+
+    var add_val5_acc = document.getElementById("add5_acc");
+    var add_val5_sum_acc = document.getElementById("add5_sum_acc");
+
     var updateValue = function(){
         
         var tmp_vibrate=Math.abs(zl1s[cur]*1000);
@@ -314,43 +342,44 @@
         // id 하나를 지정하고 거기에 값을 넣어준다.
 
         if (speed_float < 10) {
-            text.textContent = "\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0"
+            text.textContent = "\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0"
                 + "지각하지 못함";
         } else if (speed_float < 40) {
-            text.textContent = "\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0"
-                + "약간 지각";
+            text.textContent = "\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0" +
+                "약간 지각";
         } else if (speed_float < 125) {
-            text.textContent = "\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0"
-                + "확실히 지각";
+             text.textContent = "\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0" +
+                 "확실히 지각";
         } else if (speed_float < 400) {
-            text.textContent = "\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0" +
+            text.textContent = "\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0" +
                 "짜증을 일으킴";
         } else if (speed_float < 1000) {
-            text.textContent = "지속되면 고통스러움";
+            text.textContent = "지속시 고통스러움";
         } else if (speed_float >=1000) {
-            text.textContent = "\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0"
+            text.textContent = "\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0"
             +"해를 끼침";
         } else{
-            text.textContent = "\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0"
+            text.textContent = "\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0"
              + "인지 안됨";
             // text.textContent = "불쾌하고 지속되면 고통스러움";
         }
-        // 슬라이드 바
-
         
-        output.innerHTML = slider.value;
-        output2.innerHTML = slider2.value;
 
-        slider.oninput = function () {
-            output.innerHTML = this.value;
-        }
+        ref_1 = add_val1_acc.value;
+        ref_2 = add_val1_sum_acc.value;
+        
+        ref_3 = add_val2_acc.value;
+        ref_4 = add_val2_sum_acc.value;
 
-        slider2.oninput = function () {
-            output2.innerHTML = this.value;
-        }
+        ref_5 = add_val3_acc.value;
+        ref_6 = add_val3_sum_acc.value;
 
-        ref_1 = slider.value;
-        ref_2 = slider2.value;
+        ref_7 = add_val4_acc.value;
+        ref_8 = add_val4_sum_acc.value;
+
+        ref_9 = add_val5_acc.value;
+        ref_10 = add_val5_sum_acc.value;
+
     };
 
     
@@ -364,8 +393,6 @@
 
             walking(vh);
             recordXYZ(vh);
-
-
         } catch (ex) {
             document.getElementById("log").textContent = ex.toString();
         }
@@ -399,6 +426,7 @@
         type: 'line'
     }
     
+    // 기준선 1
     var trace3 = {
         y: [ref_1],
         type: 'line'
@@ -408,9 +436,49 @@
         type: 'line'
     }
 
-    var chartData = [trace1,trace3];
-    var chartData2 = [trace2,trace4];
+    // 기준선 2
+    var trace5 = {
+        y: [ref_3],
+        type: 'line'
+    }
+    var trace6 = {
+        y: [ref_4],
+        type: 'line'
+    }
 
+    // 기준선 3
+    var trace7 = {
+        y: [ref_5],
+        type: 'line'
+    }
+    var trace8 = {
+        y: [ref_6],
+        type: 'line'
+    }
+
+    // 기준선 4
+    var trace9 = {
+        y: [ref_7],
+        type: 'line'
+    }
+    var trace10 = {
+        y: [ref_8],
+        type: 'line'
+    }
+    
+    // 기준선 5
+    var trace11 = {
+        y: [ref_9],
+        type: 'line'
+    }
+    var trace12 = {
+        y: [ref_10],
+        type: 'line'
+    }
+
+    var chartData = [trace1,trace3,trace5,trace7,trace9,trace11];
+    var chartData2 = [trace2,trace4,trace6,trace8,trace10,trace12];
+// 여기까지
 
 
     var layout = {
@@ -468,11 +536,28 @@
     setInterval(function () {
 
         Plotly.extendTraces('chart', {
-            y: [[data],[ref_1]]
-        }, [0,1]);
+            y: [
+                [data],
+                [ref_1],
+                [ref_3],
+                [ref_5],
+                [ref_7],
+                [ref_9]
+            ]
+        }, [0,1,2,3,4,5]);
+        
         Plotly.extendTraces('chart', {
-        y: [[(-1) * data],[ref_1]]
-        }, [0,1]);
+        
+            y: [
+                [(-1) * data],
+                [ref_1],
+                [ref_3],
+                [ref_5],
+                [ref_7],
+                [ref_9]
+            ]
+        
+        }, [0,1,2,3,4,5]);
         cnt += 2;
 
         createFrame.innerHTML = data;
@@ -490,9 +575,14 @@
         setInterval(function () {
         Plotly.extendTraces('chart2', {
             y: [
-            [data],[ref_2]
+            [data], 
+            [ref_2], 
+            [ref_4], 
+            [ref_6], 
+            [ref_8], 
+            [ref_10]
             ]
-        }, [0,1]);
+        }, [0,1,2,3,4,5]);
     }, 200);
 
 
