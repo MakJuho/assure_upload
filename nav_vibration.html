@@ -2,590 +2,333 @@
 
 <head>
   <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-
+  <title>Vibration Meter</title>
   <!-- 자판 키보드 활성화시 확대 기능 차단 -->
-  <meta name="viewport" content="user-scalable=no"/>
-  <link rel="stylesheet" href="font.css">
-  <script src="jquery-2.1.4.js"></script>
-  <!-- <script src="plotly.min.js"></script> -->
-  <!-- <link rel='stylesheet' type='text/css' href="rotate.css"> -->
-
-  <script type="text/javascript" src="plotly.min.js"></script>
-  <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
-
-  <!-- 모달 박스 css -->
-  <link rel="stylesheet" href="bootstrap.css">
+  <meta name="viewport" content="user-scalable=no" content="width=device-width, initial-scale=1.0" />
+  <!-- Css Files-->
+  <script src="assets/js/jquery-3.3.1.min.js" defer></script>
+  <link rel="stylesheet" href="assets/css/bootstrap.min.css">
 
   <style>
-    /* 슬라이드 컨테이너 */
-    .panel{  
-      padding : 0px 0px 30px 0px;
-      background-color :#d9edf7;
-    }
-    .slidecontainer {
-      width: 100%;
-      display : inline-block;
-      padding : 0px 0px 0px 0px;
-      /* padding : 0px 0px 30px 37%; */
-      /* display : inline-block; */
-      /* background-color: white; */
+    .grid-container {
+
+      margin-top: 0px;
+      height: 1400px;
+      display: grid;
+      grid-template-columns: repeat(8, 1fr);
+      grid-template-rows: repeat(14, 1fr);
+      grid-gap: 10px;
+      background-color: black;
+      padding: 10px;
     }
 
-    .slider {
-      -webkit-appearance: none;
-      width: 40%;
-      height: 30px;
-      border-radius: 5px;
-      background: #31708f;
-      outline: none;
-      opacity: 0.5;
-      -webkit-transition: .2s;
-      transition: opacity .2s;
+    .grid-container>div {
+      background-color: black;
+      text-align: center;
+      padding: 20px 0;
+      font-size: 30px;
     }
 
-    .slider:hover{
-      opacity: 1;
+    .item1 {
+
+      grid-column-start: 1;
+      grid-column-end: 10;
+      grid-row-start: 1;
+      grid-row-end: 4;
+      z-index: 2;
     }
 
-    .slider::-webkit-slider-thumb {
-
-      -webkit-appearance: none;
-      appearance: none;
-      width: 25px;
-      height: 25px;
-      border-radius: 50%;
-      background: white;
-      cursor: pointer;
-
+    .item1>p {
+      font-size: 35px;
+      padding-left: 200px;
     }
 
-    .slider::-moz-range-thumb {
+    .item2 {
+      grid-column-start: 1;
+      grid-column-end: 10;
+      grid-row-start: 4;
+      grid-row-end: 6;
+      z-index:1;
+    }
 
-      width: 25px;
-      height: 25px;
-      border-radius: 25%;
-      background: #31708f;
-      cursor: pointer;
+    .item4 {
+      grid-column-start: 1;
+      grid-column-end: 10;
+      grid-row-start: 6;
+      grid-row-end: 7;
+      height: 100px;
+    }
 
+    .item8 {
+      grid-column-start: 1;
+      grid-column-end: 9;
+      grid-row-start: 7;
+      grid-row-end: 11;
+    }
+
+    @font-face {
+      font-family: 'Daum';
+      src: url(assets/fonts/Daum_SemiBold.ttf) format('truetype');
+    }
+
+
+    #list {
+      text-align: center;
+      font-size: 45px;
+      border-bottom: 1px solid gray;
+      margin-bottom: 10px;
+      padding: 20px;
     }
 
     body {
-      /* background:url('http://superkts.cdn1.cafe24.com/test1.jpg') no-repeat center center fixed; */
-      /* background: #bce8f1; */
-      background: white;
-      /* background-op: 50%; */
+      background: black;
       -webkit-background-size: cover;
       -moz-background-size: cover;
       -o-background-size: cover;
       background-size: cover;
-      margin:0;
-    }
-    ul>li {
-      display: none;
-    }
-
-    #reset {
-      display: none;
-    }
-
-    #counter {
-      display: none;
-    }
-
-    #xyview {
-      display: none;
-    }
-
-    #zview {
-      display: none;
-    }
-
-    #chartContainer {
-      display: none;
-    }
-    
-    /* body {
-      margin: 0; */
-    /* } */
-    /* p {
-      text-align: center;
-      font-size: 40px;
-      padding: 0;
       margin: 0;
-      /* background-color: rgb(0, 0, 0); */
-    /* } */
+    }
+
 
     #chart {
-      margin: 60px 0px 0px 0px;
+      margin: 0px 0px 0px 0px;
       padding: 0;
-      height: 40%;
-      /* background-color: rgb(0, 255, 0); */
+      height: 50%;
     }
 
-    #chart2 {
-      margin: 0;
-      padding: 0;
-      height: 40%;
-      /* background-color: rgb(0, 0, 0); */
+    p {
+      color: white;
+      text-align: left;
+      font-size: 30px;
+      margin: 0px 0px 0px 40px;
     }
 
-    /* #container{width:100%; color:#31708f;} */
+    /* h1 {
 
-    /* #val{
-      float:left;
-    }
-    #right{
-      float:right;
-    }
-    #center{
-      margin:0 auto;
-    } 
+      text-align: left;
+      font-size: 40px;
+      margin: 0px 0px 0px 10px;
+      display: inline-block;
+      padding: 20px 0px 0px 0px;
+      font-family: "Daum";
+    } */
 
-
-    /* side_BAR 스타일 꾸미기 */
-    .slidecontainer{
-      display: none;
-    }
-    .menu a {
-      cursor: pointer;
-    }
-
-    .menu .hide {
-      display: none;
-    }
-
-    p{
-      color: #31708f;
-      text-align:left;
-      font-size : 30px;
-      margin : 0px 0px 0px 150px;
-    }
-    
-    h1{
-      
-      text-align:left;
-      font-size : 40px;
-      margin : 0px 0px 0px 10px;
-      display : inline-block;
-      padding : 20px 0px 0px 0px;
-      font-family:"Daum";
-    }
-    /* .main{
-      background-color: yellow;
-      border: 1px solid red;
-      width: 800px;
-      height: 120px;
-    }  */
-
-    .main_common{ 
+    .main_common {
       display: inline-block;
       /* margin : 0px 0px 0px 300px ; */
-
     }
 
-    .content {
-      /* display: table-cell; */
+    /* .content {
       display: inline-block;
       vertical-align: middle;
-      text-align: center;
-    }
-    .main_1{
-      margin : 30px 0px 0px 150px;
-      /* width: 100px;
-      height: 50px; */
-      font-size : 30px;
-      /* border: 1px solid blue; */
-      float : center;
-      color : #31708f;
-      /* text-align: center; */
-    }
-  
-    .main_3{
-      margin : 0px 10px 0px 0px;
-      /* width: 270px;
-      height: 50px; */
-      font-size : 70px;
-      /* border: none; */
-      float: right;
       text-align: right;
+    } */
+
+    .main_1 {
+      margin: 0px 20px 0px 0px;
+      font-size: 30px;
+      float: right;
+      text-align: center;
+      color: white;
+    }
+
+    .main_3 {
+      text-align:right;
+      font-size: 140px;
+      float: right;
+
+      color: white;
+      display:inline-block;
+    }
+
+    /* css 맞추기 */
+
+    .colorfont {
       color: #31708f;
-      
+      display: inline-block;
+      font-family: Daum, "돋움", dotum, "굴림", gulim, arial, helvetica, sans-serif;
     }
-    
-    /* .main_4{
-      margin : 0px 0px 0px 0px;
-      /* width: 270px;
-      height: 50px; */
-      /* font-size : 25px; */
-      /* border: none; */
-      /* float: right;
-      color: #31708f; */
-/* } */
-    #space{
-      font-size:10;
+
+    .colorfont_box {
+      color: #31708f;
+      display: block;
+      font-family: Daum, "돋움", dotum, "굴림", gulim, arial, helvetica, sans-serif;
     }
+
+    #space {
+      font-size: 10;
+    }
+
     .portrait_only {
       display: none;
-    }    
+    }
 
-    .first_ref{
+    .first_ref {
       display: none;
     }
 
-    .second_ref{
+    .second_ref {
       display: none;
     }
 
-    .third_ref{
+    .third_ref {
       display: none;
     }
 
-    .fourth_ref{
+    .fourth_ref {
       display: none;
     }
 
-    .fifth_ref{
+    .fifth_ref {
       display: none;
     }
-
   </style>
 
-  <!-- /* side_BAR 버튼 클릭시 Event */ -->
-  <script>
-
-// [0,0,0,0,0] 으로 배열 초기화
-var int_box= Array.apply(null, new Array(5)).map(Number.prototype.valueOf,0);
-var count=0;
-var check=0;
-// 버튼 클릭 할 때
-  $(document).ready(function(){
-    count=0;
-    // 추가 기준선 5
-    $("#add_btn").click(function () {
-
-      for(var i=0; i<int_box.length;i++){
-        if(int_box[i]==0){
-          check=i+1;
-          break;
-        }
-      }
-      if(check==1){
-        int_box[0]=1;
-        $(".first_ref").show();
-      }else if(check==2){
-        int_box[1]=1;
-        $(".second_ref").show();
-      }else if(check==3){
-        int_box[2]=1;
-        $(".third_ref").show();
-      }else if(check==4){
-        int_box[3]=1;
-        $(".fourth_ref").show();
-      }else if(check==5){
-        int_box[4]=1;
-        $(".fifth_ref").show();
-    }
-      });
-
-    // 삭제 기준선 5
-    $("#sub_btn_1").click(function () {
-      int_box[0]=0;
-        $(".first_ref").hide();
-        $("#add1_acc").val('NULL');
-        $("#add1_sum_acc").val('NULL');
-    });
-
-    $("#sub_btn_2").click(function () {
-      int_box[1]=0;
-      $(".second_ref").hide();
-      $("#add2_acc").val('NULL');
-      $("#add2_sum_acc").val('NULL');
-    });
-
-    $("#sub_btn_3").click(function () {
-      int_box[2]=0;
-      $(".third_ref").hide();
-      $("#add3_acc").val('NULL');
-      $("#add3_sum_acc").val('NULL');
-    });
-
-    $("#sub_btn_4").click(function () {
-      int_box[3]=0;
-      $(".fourth_ref").hide();
-      $("#add4_acc").val('NULL');
-      $("#add4_sum_acc").val('NULL');
-    });
-
-    $("#sub_btn_5").click(function () {
-      int_box[4]=0;
-      $(".fifth_ref").hide();
-      $("#add5_acc").val('NULL');
-      $("#add5_sum_acc").val('NULL');
-    });
-  });
-  
-  </script>
-  
-  <script type="text/javascript" src="script.js"></script>
+  <script type="text/javascript" src="assets/js/script.js" defer></script>
 
 </head>
 
 <body>
-  <div class="panel">
-<h1 style="color: #31708f;">Vibration Level</h1>
 
-    <div id="chartContainer" style="height: 300px; width: 100%;">
-    </div>
-    <!-- <div><h2>Acceleration (w/o Gravity)</h2> -->
-    <ul>
-      <li>
-        x:
-        <input id="x1" type="range" max="20.0" min="-20.0" readonly="readonly" />
-        <input id="x1n" type="number" max="20.0" min="-20.0" readonly="readonly" />
-      </li>
-      <li>y:
-        <input id="y1" type="range" max="20.0" min="-20.0" readonly="readonly" />
-        <input id="y1n" type="number" max="20.0" min="-20.0" readonly="readonly" />
-      </li>
-      <li>z:
-        <input id="z1" type="range" max="20.0" min="-20.0" readonly="readonly" />
-        <input id="z1n" type="number" max="20.0" min="-20.0" readonly="readonly" />
-      </li>
-      <li>abs:
-        <input id="abs1" type="range" max="20.0" min="-20.0" readonly="readonly" />
-        <input id="abs1n" type="number" max="20.0" min="-20.0" readonly="readonly" />
-      </li>
-    </ul>
-    <!-- </div> -->
+  <h1 style="color:white; font-size:70px; text-align:center;">Vibration level</h1>
 
-    <!-- <div><h2>Acceleration (w/ Gravity)</h2> -->
-    <ul>
-      <li>x:
-        <input id="x2" type="range" max="20.0" min="-20.0" readonly="readonly" />
-        <input id="x2n" type="number" max="20.0" min="-20.0" readonly="readonly" />
-      </li>
-      <li>y:
-        <input id="y2" type="range" max="20.0" min="-20.0" readonly="readonly" />
-        <input id="y2n" type="number" max="20.0" min="-20.0" readonly="readonly" />
-      </li>
-      <li>z:
-        <input id="z2" type="range" max="20.0" min="-20.0" readonly="readonly" />
-        <input id="z2n" type="number" max="20.0" min="-20.0" readonly="readonly" />
-      </li>
-      <li>abs:
-        <input id="abs2" type="range" max="20.0" min="-20.0" readonly="readonly" />
-        <input id="abs2n" type="number" max="20.0" min="-20.0" readonly="readonly" />
-      </li>
-    </ul>
-    <!-- </div> -->
-    <!-- <div><h2>Acceleration (vertical/horizontal)</h2> -->
-    <ul>
-      <li>v:
-        <input id="v" type="range" max="20.0" min="-20.0" readonly="readonly" />
-        <input id="vn" type="number" max="20.0" min="-20.0" readonly="readonly" />
-      </li>
-      <li>h:
-        <input id="h" type="range" max="20.0" min="-20.0" readonly="readonly" />
-        <input id="hn" type="number" max="20.0" min="-20.0" readonly="readonly" />
-      </li>
-    </ul>
-    <!-- </div> -->
-
-    <div>
-      <span id="counter"></span>
-      <button id="reset" style="padding: 5px 30px; border-radius: 10px;">reset</button>
-    </div>
-
-    <div>
-      <canvas id="xyview" style="width: 200px; height: 200px; background-color: lightgray" width="200" height="200"></canvas>
-      <canvas id="zview" style="width: 600px; height: 200px; background-color: lightgray" width="600" height="200"></canvas>
-    </div>
-    
-
-    <!-- <div class="main"> -->
-  <!-- <p>진동값 -->
-    <!-- 공백란 만들기 -->
-  <!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
-    <!-- </p> -->
-
-    <!-- 모달 부분 시작 -->
-    
-    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal2" style="font-size: 25px; float:left; margin:40px 0px 0px 30px;">기준선 설정</button>
-    <!-- Modal -->
-    <div id="myModal2" class="modal fade" role="dialog">
-      <div class="modal-dialog modal-lg">
-        <!-- Modal content-->
-        <div class="modal-content">
-          <div class="modal-header">
-            <h4 class="modal-title">기준선 변경</h4>
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-          </div>
-          <div class="modal-body">
-
-            <!-- <input type="number" placeholder="값을 입력해주세요" class="colorfont" id="add" style="margin-left:13px"></input> -->
-
-            <button type="button" class="btn btn-info btn-lg" id="add_btn" style="position:absolute; right:15%;"onclick="add()">추가</button>
-            <div class="colorfont_box" id="list">
-              <h1>기준선 목록</h1>
-            </div>
-            
-
-            <!-- 1번 기준선 -->
-            <div class="first_ref">
-              <br>
-              <text style="font-size: 30px">진동값_1 :</text>
-              <input type="number" placeholder="기준선 값" class="colorfont" id="add1_acc" style="margin-left:12px; text-align:center; border:1px solid #ccc;"></input>
-              <button type="button" class="btn btn-info btn-lg" id="sub_btn_1" style="position:absolute; right:15%; background-color:red; border-color:red;" onclick="sub_first_ref()">삭제</button>
-
-              <div></div>
-              <br>
-              <text style="font-size: 30px">누적 진동값_1 :</text>
-              <input type="number" placeholder="기준선 값" class="colorfont" id="add1_sum_acc" style="margin-left:12px; text-align:center; border:1px solid #ccc;"></input>
-              <br>
-              <br>
-              <br>
-            </div>
+    <!-- 그리드 시작 -->
+    <div class="grid-container">
 
 
-            <!-- 2번 기준선 -->
-            <div class="second_ref">
-              <text style="font-size: 30px">진동값_2 :</text>
-              <input type="number" placeholder="기준선 값" class="colorfont" id="add2_acc" style="margin-left:12px; text-align:center; border:1px solid #ccc;"></input>
-              <button type="button" class="btn btn-info btn-lg" id="sub_btn_2" style="position:absolute; right:15%; background-color:red; border-color:red;"
-  onclick="sub_second_ref()">삭제</button>
-
-              <div></div>
-              <br>
-              <text style="font-size: 30px">누적 진동값_2 :</text>
-              <input type="number" placeholder="기준선 값" class="colorfont" id="add2_sum_acc" style="margin-left:12px; text-align:center; border:1px solid #ccc;"></input>
-              <br>
-              <br>
-              <br>
-            </div>
-
-
-            <!-- 3번 기준선 -->
-            <div class="third_ref">
-              <text style="font-size: 30px">진동값_3 :</text>
-              <input type="number" placeholder="기준선 값" class="colorfont" id="add3_acc" style="margin-left:12px; text-align:center; border:1px solid #ccc;"></input>
-              <button type="button" class="btn btn-info btn-lg" id="sub_btn_3" style="position:absolute; right:15%; background-color:red; border-color:red;"
-  onclick="sub_third_ref()">삭제</button>
-
-              <div></div>
-              <br>
-              <text style="font-size: 30px">누적 진동값_3 :</text>
-              <input type="number" placeholder="기준선 값" class="colorfont" id="add3_sum_acc" style="margin-left:12px; text-align:center; border:1px solid #ccc;"></input>
-              <br>
-              <br>
-              <br>
-            </div>
-
-
-            <!-- 4번 기준선 -->
-            <div class="fourth_ref">
-              <text style="font-size: 30px">진동값_4 :</text>
-              <input type="number" placeholder="기준선 값" class="colorfont" id="add4_acc" style="margin-left:12px; text-align:center; border:1px solid #ccc;"></input>
-              <button type="button" class="btn btn-info btn-lg" id="sub_btn_4" style="position:absolute; right:15%; background-color:red; border-color:red;"
-  onclick="sub_fourth_ref()">삭제</button>
-
-              <div></div>
-              <br>
-              <text style="font-size: 30px">누적 진동값_4 :</text>
-              <input type="number" placeholder="기준선 값" class="colorfont" id="add4_sum_acc" style="margin-left:12px; text-align:center; border:1px solid #ccc;"></input>
-              <br>
-              <br>
-              <br>
-            </div>
-
-
-            <!-- 5번 기준선 -->
-            <div class="fifth_ref">
-              <text style="font-size: 30px">진동값_5 :</text>
-              <input type="number" placeholder="기준선 값" class="colorfont" id="add5_acc" style="margin-left:12px; text-align:center; border:1px solid #ccc;"></input>
-              <button type="button" class="btn btn-info btn-lg" id="sub_btn_5" style="position:absolute; right:15%; background-color:red; border-color:red;"
-  onclick="sub_fifth_ref()">삭제</button>
-
-              <div></div>
-              <br>
-              <text style="font-size: 30px">누적 진동값_5 :</text>
-              <input type="number" placeholder="기준선 값" class="colorfont" id="add5_sum_acc" style="margin-left:12px; text-align:center; border:1px solid #ccc;"></input>
-            </div>
-
-          </div>
-
-          <div class="modal-footer">
-            <button type="submit" class="btn btn-default" data-dismiss="modal">확인</button>
-          </div>
-
-        </div>
+      <div class="item1">
+        <p id="p6">Ⅵ. 해를 끼침</p>
+        <p id="p5">Ⅴ. 지속시 고통스러움</p>
+        <p id="p4">Ⅳ. 짜증을 일으킴</p>
+        <p id="p3">Ⅲ. 확실히 지각</p>
+        <p id="p2">Ⅱ. 약간 지각</p>
+        <p id="p1">Ⅰ. 지각하지 못함</p>
       </div>
-    </div>
-    <!-- 모달 부분 끝 -->
-
-    <div class="main_1 main_common" id="right"><p class="content"></p></div>
-    <!-- <div class="main_2 main_common"><p class="content">test2</p></div> -->
-    <div class="main_3 main_common" id="val"></div>
-    
 
 
-  </div>
+      <div class="item2">
+        <div class="main_common" id="m_s2" style="color:white; display: inline-block; font-size:60px; padding-top: 80px; float:right; padding-right: 220px;">m/s2</div>
+        <div class="main_common" id="mm_s2" style="color:white; display: none; font-size:60px; padding-top: 80px; float:right; padding-right: 220px;">mm/s2</div>
+        <div class="main_3 main_common" id="val"></div>
+        <div class="main_1 main_common" id="left"></div>
+      </div>
 
-  
-  
-  <div id="chart"></div>
-    <!-- <div id="container"> -->
-    
-    <!-- <div id="val">0</div>
-    
-    
-    <div id="right">HAHAHA</div> -->
-  
+      <div class="item4">
+        <!-- 모달 부분 시작 -->
+        <div class="viewing">
+          <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal2" style="font-size: 35px; background-color: darkblue; color: white; border-color:white; padding:20px; border-width: 3; border-radius:12px; float:left; margin:0px 0px 0px 150px;">기준선 설정</button>
+          <!-- Modal -->
+          <div id="myModal2" class="modal fade" role="dialog">
+            <div class="modal-dialog modal-lg">
+              <!-- modal content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" style="font-size:100px; margin-bottom:40px;">x</button>
+                    <h1 class="modal-title colorfont_box" style="padding-top:20px">기준선 변경</h1>
+                  <br>
+                </div>
+                <div class="modal-body">
+                  <div class="colorfont_box" id="list">
 
-  <!-- <ul>
-    <li>
-      <span id="text">진동값:</span>
+                      <div id="title" class="colorfont"style="font-size:60px;">기준선</div>
 
-    </li>
-    <li>
-      <span id="val">0</span>
+                    <button type="button" class="btn btn-info" id="add_btn" style="margin-left: 10px; border-radius: 30px 30px 30px 30px;font-size:60px;">추가
+                    </button>
+                  </div>
+                  <div class="first_ref colorfont_box" style="margin-bottom:20px;">
+                    <div class="input-group">
+                      <text style="font-size: 55px"> >&ensp; 기준선 1 </text>
+                      <input class="input-lg" type="number" placeholder="기준선 값" id="add1_acc" style="font-size:40px;margin:0px 15px 0px 5px; text-align: center; width:300px; height:100px;"></input>
+                      <button type="button" class="btn btn-danger btn-lg" id="sub_btn_1" onclick="sub_first_ref()" style="margin:0px 0px 0px 20px;  border-radius: 30px 30px 30px 30px; font-size:60px;">삭제</button>
+                    </div>
+                  </div>
 
-    </li>
-    <li>
-      <span id="express">자는중</a>
-    </li>
+                  <div class="second_ref colorfont_box" style="margin-bottom:20px;">
+                    <div class="input-group">
+                      <text style="font-size: 55px"> >&ensp; 기준선 2 </text>
+                      <input class="input-lg" type="number" placeholder="기준선 값" id="add2_acc" style="font-size:40px; margin:0px 15px 0px 5px; text-align: center; width:300px;  height: 100px;"></input>
+                      <button type="button" class="btn btn-danger btn-lg" id="sub_btn_2" onclick="sub_second_ref()" style="margin:0px 0px 0px 20px; border-radius: 30px 30px 30px 30px; font-size:60px;">삭제</button>
+                    </div>
+                  </div>
 
-  </ul> -->
+                  <div class="third_ref colorfont_box" style="margin-bottom:20px;">
+                    <div class="input-group">
+                      <text style="font-size: 55px"> >&ensp; 기준선 3 </text>
+                      <input class="input-lg" type="number" placeholder="기준선 값" id="add3_acc" style="font-size:40px; margin:0px 15px 0px 5px; text-align: center;width:300px;  height: 100px;"></input>
+                      <button type="button" class="btn btn-danger btn-lg" id="sub_btn_3" onclick="sub_third_ref()" style="margin:0px 0px 0px 20px; border-radius: 30px 30px 30px 30px; font-size:60px;">삭제</button>
+                    </div>
+                  </div>
 
-  <!-- 진동 값 <span id="val" style="overflow-y:auto;"> -->
+                  <div class="fourth_ref colorfont_box" style="margin-bottom:20px;">
+                    <div class="input-group">
+                      <text style="font-size: 55px"> >&ensp; 기준선 4 </text>
+                      <input class="input-lg" type="number" placeholder="기준선 값" id="add4_acc" style="font-size:40px; margin:0px 15px 0px 5px; text-align: center;width:300px;  height: 100px;"></input>
+                      <button type="button" class="btn btn-danger btn-lg" id="sub_btn_4" onclick="sub_fourth_ref()" style="margin:0px 0px 0px 20px; border-radius: 30px 30px 30px 30px; font-size:60px;">삭제</button>
+                    </div>
+                  </div>
 
-  
-  <!-- <div id="vibrate_val" style="background: blue">진동 값 </div>
-  <div id="val" style="background: yellow">0</div> -->
-  <!-- <span id="text" style="background: green">쪼아~</span> -->
+                  <div class="fifth_ref colorfont_box" style="margin-bottom:20px;">
+                    <div class="input-group">
+                      <text style="font-size: 55px"> >&ensp; 기준선 5 </text>
+                      <input class="input-lg" type="number" placeholder="기준선 값" id="add5_acc" style="font-size:40px; margin:0px 15px 0px 5px; text-align: center;width:300px;  height: 100px;"></input>
+                      <button type="button" class="btn btn-danger btn-lg" id="sub_btn_5" onclick="sub_fifth_ref()" style="margin:0px 0px 0px 20px; border-radius: 30px 30px 30px 30px; font-size:60px;">삭제</button>
+                    </div>
+                  </div>
 
+                </div>
+                <div class="modal-footer">
+                <button type="submit" class="btn btn-default" style="font-size: 50px; width: 100%;" data-dismiss="modal">
+                  저장
+                </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- 모달 부분 끝 -->
+        </div>
 
-  <!-- 슬라이더 1  -->
-<!-- <div class="slidecontainer">
-  <input type="range" min="1" max="4000" value="2000" class="slider" id="myRange"> 기준선:
-  <span id="slide_val1"></span>
-</div> -->
+<button id="pause_btn" class="glyphicon glyphicon-pause" onclick="pause();" style="font-size:36px; background-color:red;color:white; display: none;border-color:white;margin-right: 28px;padding:24px 20px; border-width: 3; border-radius: 12px">
+          <p style="font-size:35px; float:right; margin:0px 5px 0px 0px;">
+            <strong>중지
+            </strong>
+          </p>
+        </button>
+        <button id="play_btn" class="glyphicon glyphicon-play" onclick="start(); " style="font-size:36px; background-color:red;color:white; border-color:white;padding: 24px 20px; margin-right: 28px;border-width: 3; border-radius: 12px;">
+          <p style="font-size:35px; float:right; margin:0px 5px 0px 0px;">
+            <strong>시작
+            </strong>
+          </p>
+        </button>
+        <button id="mm_btn" class="glyphicon" onclick="mtomm();" style="font-size:35px; background-color:rgb(185, 238, 39);color:white; border-color:white;padding:24px 20px; border-width: 3; border-radius: 12px">
+          <p style="font-size:35px; float:right; margin:0px 5px 0px 0px;">
+            <strong>단위변환(->mm/s2)
+            </strong>
+          </p>
+        </button>
+        <button id="m_btn" class="glyphicon" onclick="mmtom();" style="display:none;font-size:35px; background-color:rgb(224, 224, 49);color:white; border-color:white;padding:24px 35px; border-width: 3; border-radius: 12px">
+          <p style="font-size:35px; float:right; margin:0px 5px 0px 0px;">
+            <strong>단위변환(->m/s2)
+            </strong>
+          </p>
+        </button>
+        
+        <!-- <button id="play_btn" class="glyphicon glyphicon-play" onclick="start(); " style="font-size:60px; background-color:black; color:white; border:white; margin:0px 30px 0px 0px;  border-radius: 100px">
+        </button>
+          <button id="pause_btn" class="glyphicon glyphicon-pause" onclick="pause();" style="font-size:60px; background-color:black; color:white; border:white; display:none; margin:0px 0px 0px 0px; border-radius: 100px">
+        </button> -->
 
+      </div>
+      <div class="item8">
+        <!-- <div id="chartContainer" style="height: 30%; width: 100%;"></div> -->
 
-<div id="chart2"></div>
+        <div id="chart"></div>
+      </div>
+      <!-- 그리드 끝 -->
+      <!-- JS Files -->
+      <script type="text/javascript" src="assets/js/plotly.min.js" async></script>
+      <script src="assets/js/bootstrap.min.js" async></script>
 
-<!-- 슬라이더 2 
-<div class="slidecontainer">
-  <input type="range" min="1" max="4000" value="2000" class="slider" id="myRange2"> 기준선:
-  <span id="slide_val2"></span>
-</div> -->
-
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-  crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-  crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-  crossorigin="anonymous"></script>
 
 </body>
 
-</html>  
+</html>
