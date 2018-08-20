@@ -137,7 +137,9 @@
         
         currentTime = +new Date();
         gabOfTime = (currentTime - lastTime);
-        var acc=send_acc_x + send_acc_y + send_acc_z - lastX - lastY - lastZ
+        var acc=send_acc_x + send_acc_y + send_acc_z - lastX - lastY - lastZ;
+
+        //m/s2일 때
         if(check_unit==1){
             if (gabOfTime > 100) {
                 lastTime = currentTime;
@@ -176,7 +178,6 @@
 
                 }
 
-            // 이슈발생
                 if (speed_float < 0.02) {
                     document.getElementById("p1").style.color = "red";
                 } else if (speed_float < 0.06) {
@@ -200,6 +201,8 @@
                 value.textContent = stop_val;
                 data = stop_val;
             }
+
+            // mm/s2일 때
         }else if(check_unit==0){
             if (gabOfTime > 100) {
                 lastTime = currentTime;
@@ -261,7 +264,7 @@
             } else {
                 value.textContent = stop_val;
                 data = stop_val;
-            }
+                }
         }
         
     };
@@ -314,7 +317,11 @@
         type: 'line',
         name: '기준선1',
         mode: 'lines',
-        showlegend: false
+        showlegend: false,
+        line: {
+            color: 'green',
+            width: 5
+        }
     }
 
     // 기준선 2
@@ -324,7 +331,11 @@
         type: 'line',
         name: '기준선2',
         mode: 'lines',
-        showlegend: false
+        showlegend: false,
+        line: {
+            color: 'yellow',
+            width: 5
+        }
     }
 
     // 기준선 3
@@ -334,7 +345,11 @@
         type: 'line',
         name: '기준선3',
         mode: 'lines',
-        showlegend: false
+        showlegend: false,
+        line: {
+            color: 'blue',
+            width: 5
+        }
     }
 
     // 기준선 4
@@ -344,7 +359,11 @@
         type: 'line',
         name: '기준선4',
         mode: 'lines',
-        showlegend: false
+        showlegend: false,
+        line: {
+            color: 'sky',
+            width: 5
+        }
     }
     
     // 기준선 5
@@ -354,7 +373,11 @@
         type: 'line',
         name: '기준선5',
         mode: 'lines',
-        showlegend: false
+        showlegend: false,
+        line: {
+            color: 'orange',
+            width: 5
+        }
     }
 
     var chartData = [trace1,trace3,trace5,trace7,trace9,trace11];
@@ -415,47 +438,123 @@
     
     
     Plotly.newPlot('chart', chartData, layout,
-        { displaylogo: false, 
-            modeBarButtonsToRemove: ['pan2d', 'select2d', 'lasso2d', 'toImage', 'sendDataToCloud', 'resetScale2d', 'hoverClosestCartesian', 'toggleSpikelines', 'hoverCompareCartesian', 'zoom2d']}
-        );
+    { 
+        displaylogo: false, 
+        modeBarButtonsToRemove: ['pan2d', 'select2d', 'lasso2d', 'toImage', 'sendDataToCloud', 'resetScale2d', 'hoverClosestCartesian', 'toggleSpikelines', 'hoverCompareCartesian', 'zoom2d']
+    }
+    );
   
 
     var cnt = 0;
     var mainFrame = document.getElementById("val");
     var createFrame = document.createElement("div");
-    
 
 
+    // var trace1 = {
+    //     x: [time],
+    //     y: [data],
+    //     type: 'line',
+    //     mode: 'lines',
+    //     showlegend: false,
+    //     line: {
+    //         color: 'red',
+    //         width: 5
+    //     }
+    // };
+    var color_update = {
+        type: 'line',
+        mode: 'lines',
+        showlegend: false,
+        line: {
+            color: 'red',
+            width: 5
+        }
+    };
+    var color_update1={
+        type: 'line',
+        mode: 'lines',
+        showlegend: true,
+        name: '기준선1',
+        line: {
+            color: 'green',
+            width: 5
+        }
+    }
+    var color_update2 = {
+        type: 'line',
+        mode: 'lines',
+        showlegend: true,
+        name: '기준선2',
+        line: {
+            color: 'yellow',
+            width: 5
+        }
+    }
+    var color_update3 = {
+        type: 'line',
+        mode: 'lines',
+        showlegend: true,
+        name: '기준선3',
+        line: {
+            color: 'blue',
+            width: 5
+        }
+    }
+    var color_update4 = {
+        type: 'line',
+        mode: 'lines',
+        showlegend: true,
+        name: '기준선4',
+        line: {
+            color: 'sky',
+            width: 5
+        }
+    }
+    var color_update5 = {
+        type: 'line',
+        mode: 'lines',
+        showlegend: true,
+        name: '기준선5',
+        line: {
+            color: 'orange',
+            width: 5
+        }
+    }
 
     // myFunction();
     var myVar 
-    
+    function initializer_traces() {
+        
+    }
     function myFunction(){
         myVar= setInterval(function(){myTimer()}, 100);
     }
     function myStopFunction() {
         clearInterval(myVar);
     }
+    var update;
+
+    
     function myTimer()
     {
         time +=0.1;
-        var update={
+        update={
             x: [
-                    [time],
-                    [time],
-                    [time],
-                    [time],
-                    [time],
-                    [time]
+                [time],
+                [time],
+                [time],
+                [time],
+                [time],
+                [time]
                 ],
-                y: [
-                    [data],
-                    [ref_1],
-                    [ref_3],
-                    [ref_5],
-                    [ref_7],
-                    [ref_9]
-                ]
+            y: [
+                [data],
+                [ref_1],
+                [ref_3],
+                [ref_5],
+                [ref_7],
+                [ref_9]
+            ]
         }
 
 
@@ -523,22 +622,22 @@ $(document).ready(function () {
         } else if (check == 2) {
             int_box[1] = 1;
             $(".second_ref").show();
-             trace5.showlegend = true;
+            trace5.showlegend = true;
 
         } else if (check == 3) {
             int_box[2] = 1;
             $(".third_ref").show();
-             trace7.showlegend = true;
+            trace7.showlegend = true;
 
         } else if (check == 4) {
             int_box[3] = 1;
             $(".fourth_ref").show();
-             trace9.showlegend = true;
+            trace9.showlegend = true;
 
         } else if (check == 5) {
             int_box[4] = 1;
             $(".fifth_ref").show();
-             trace11.showlegend = true;
+            trace11.showlegend = true;
 
         }
     });
@@ -600,20 +699,163 @@ $(document).ready(function () {
         myStopFunction();
         cond_stop=1;
     })
+
     $("#mm_btn").click(function () {
         $("#mm_btn").hide();
         $("#m_btn").show();
-        check_unit=0;
         $("#mm_s2").show();
         $("#m_s2").hide();
 
+        Plotly.deleteTraces('chart', 0);
+        Plotly.addTraces('chart', update, 0);
+        Plotly.restyle('chart', color_update,0);
+
+        Plotly.deleteTraces('chart', 1);
+        Plotly.addTraces('chart', update, 1);
+        Plotly.restyle('chart', color_update1, 1);
+
+        Plotly.deleteTraces('chart', 2);
+        Plotly.addTraces('chart', update, 2);
+        Plotly.restyle('chart', color_update2, 2);
+
+        Plotly.deleteTraces('chart', 3);
+        Plotly.addTraces('chart', update, 3);
+        Plotly.restyle('chart', color_update3, 3);
+
+        Plotly.deleteTraces('chart', 4);
+        Plotly.addTraces('chart', update, 4);
+        Plotly.restyle('chart', color_update4, 4);
+
+        Plotly.deleteTraces('chart', 5);
+        Plotly.addTraces('chart', update, 5);
+        Plotly.restyle('chart', color_update5, 5);
+
+        time = 0;
+        Plotly.relayout('chart', {
+            xaxis: {
+                range: [time, time+30],
+                color: "white",
+                showgrid: true,
+                gridcolor: "grey",
+                gridwidth: 0.3,
+                zeroilne: true,
+                zerolinecolor: "white",
+                zerolinewidth: 3,
+                showticklabels: true,
+                tickfont: {
+                    size: 23,
+                    color: 'white'
+                },
+            },
+            yaxis: {
+                color: "white",
+                showgrid: true,
+                zeroilne: true,
+                gridcolor: "white",
+                gridwidth: 1,
+                zerolinecolor: "white",
+                zerolinewidth: 3,
+                showticklabels: true,
+                tickfont: {
+                    size: 23,
+                    color: 'white'
+                },
+            },
+            autosize: true,
+            height: 750,
+            margin: {
+                l: 50,
+                r: 50,
+                b: 120,
+                t: 100,
+                pad: 4
+            }
+        })
+
+        initializer_traces();
+        time=0;
+        cnt=0;
+        check_unit = 0;
     })
     $("#m_btn").click(function () {
         $("#m_btn").hide();
         $("#mm_btn").show();
-        check_unit=1;
         $("#m_s2").show();
         $("#mm_s2").hide();
+
+        Plotly.deleteTraces('chart', 0);
+        Plotly.addTraces('chart', update, 0);
+        Plotly.restyle('chart', color_update, 0);
+
+        Plotly.deleteTraces('chart', 1);
+        Plotly.addTraces('chart', update, 1);
+        Plotly.restyle('chart', color_update1, 1);
+
+        Plotly.deleteTraces('chart', 2);
+        Plotly.addTraces('chart', update, 2);
+        Plotly.restyle('chart', color_update2, 2);
+
+        Plotly.deleteTraces('chart', 3);
+        Plotly.addTraces('chart', update, 3);
+        Plotly.restyle('chart', color_update3,3);
+
+        Plotly.deleteTraces('chart', 4);
+        Plotly.addTraces('chart', update, 4);
+        Plotly.restyle('chart', color_update4,4);
+
+        Plotly.deleteTraces('chart', 5);
+        Plotly.addTraces('chart', update, 5);
+        Plotly.restyle('chart', color_update5,5);
+
+        time = 0;
+        Plotly.relayout('chart', {
+            xaxis: {
+
+                range: [time, time+30],
+                color: "white",
+                showgrid: true,
+                gridcolor: "grey",
+                gridwidth: 0.1,
+                zeroilne: true,
+                zerolinecolor: "white",
+                zerolinewidth: 3,
+                showticklabels: true,
+                tickfont: {
+                    size: 23,
+                    color: 'white'
+                },
+            },
+            yaxis: {
+                color: "white",
+                showgrid: true,
+                zeroilne: true,
+                gridcolor: "white",
+                gridwidth: 1,
+                zerolinecolor: "white",
+                zerolinewidth: 3,
+                showticklabels: true,
+                tickfont: {
+                    size: 23,
+                    color: 'white'
+                },
+            },
+            autosize: true,
+                height: 750,
+                margin: {
+                    l: 50,
+                    r: 50,
+                    b: 120,
+                    t: 100,
+                    pad: 4
+                }
+        })
+
+        initializer_traces();
+        
+        
+        cnt=0;
+        check_unit = 1;
     })
+    
 });
 }, false);

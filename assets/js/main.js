@@ -34,11 +34,11 @@ window.onload = function() {
 }
 
 function didntGetStream() {
-    alert('Stream generation failed.');
+    alert('이 기능은 마이크를 사용합니다. 다른 앱에서 마이크를 사용하고 있다면 종료하여 주세요.');
 }
 
 var mediaStreamSource = null;
-var data=0;
+var data=40;
 var cnt = 0;
 var time=0;
 var desc=null;
@@ -70,7 +70,7 @@ function gotStream(stream) {
 
     meter = createAudioMeter(audioContext);
     mediaStreamSource.connect(meter);
-    
+
     data=setVal+meter.volume;
     data=data.toFixed(1);
 
